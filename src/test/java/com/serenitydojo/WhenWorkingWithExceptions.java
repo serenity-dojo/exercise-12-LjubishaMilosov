@@ -24,7 +24,8 @@ public class WhenWorkingWithExceptions {
     @Test
     public void workingWithDeclaredExceptions() throws IOException {
         FileLoader fileLoader = new FileLoader();
-        assertThat(fileLoader.readHelloWorld()).isEqualTo("Hello World");
+        String fileContents = fileLoader.readHelloWorld("src/main/resources/hello.txt");
+        assertThat(fileContents).isEqualTo("Hello World");
     }
 
     /**
@@ -34,13 +35,14 @@ public class WhenWorkingWithExceptions {
     @Test
     public void catchingExceptions() {
         FileLoader fileLoader = new FileLoader();
+       // String fileContent = fileLoader.readHelloWorld("src/main/resources/hello.txt");
         assertThat(fileLoader.fileContainsText("hello.txt","Hello World")).isTrue();
     }
 
     @Test
     public void catchingExceptionsWhenTheFileDoesNotExist() {
         FileLoader fileLoader = new FileLoader();
-        assertThat(fileLoader.fileContainsText("does-not-exist.txt","Hello World")).isFalse();
+        assertThat(fileLoader.fileDoeNotContainText("does-not-exist.txt","Hello World")).isFalse();
     }
 
     /**
